@@ -1,7 +1,9 @@
 my_dict = {
     "tuple": (1, 2, 3, 'test', False, 'xiaomi'),
     "list": [1, 'test', 3, 4, False, 'apple', 'flow'],
-    "dict": {"name": 'Azamat', "family": 'Tatlok', "city": 'KR', "age": 27, "learning": 'Python', "operating system": 'mac'},
+    "dict": {"name": 'Azamat', "family": 'Tatlok', "city": 'KR', "age": 27, "learning": 'Python',
+             "operating system": 'mac'
+    },
     "set": {1, 2, 3, None, False, 'samsung'}
 }
 

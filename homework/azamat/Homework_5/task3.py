@@ -11,4 +11,3 @@ print(
     'Students', ', '.join(students),
     'study these subjects:', ', '.join(subjects)
 )
-

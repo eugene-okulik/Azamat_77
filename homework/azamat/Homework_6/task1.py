@@ -3,7 +3,7 @@ text = ('Etiam tincidunt neque erat, quis molestie enim imperdiet vel.'
 
 t = text.split()
 for t in t:
-        if t[-1] == ',' or t[-1] == '.':
-            print(t[:-1] + "‘ing’" + t[-1], end=' ')
-        else:
-            print(t + "‘ing’", end=' ')
+    if t[-1] == ',' or t[-1] == '.':
+        print(t[:-1] + "‘ing’" + t[-1], end=' ')
+    else:
+        print(t + "‘ing’", end=' ')

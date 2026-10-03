@@ -5,13 +5,13 @@ c = 'результат работы программы: 9'
 
 # Поиск индекса неизменяемой части
 # Найти числа после ":" (пишем + 1 чтобы не учитывать сам символ,а то будет ошибка при int) и добавление к числу +10
-index = a.index(':')
-print(int(a[index + 1:]) + 10)
+# index = a.index(':')
+# print(int(a[index + 1:]) + 10)
+#
+# index = b.index(':')
+# print(int(b[index + 1:]) + 10)
+#
+# index = c.index(':')
+# print(int(c[index + 1:]) + 10)
 
-index = b.index(':')
-print(int(b[index + 1:]) + 10)
-
-index = c.index(':')
-print(int(c[index + 1:]) + 10)
-
-# print(int(a[a.index(":") + 1:]) + 10)  # Можно и так - все объединить
+print(int(a[a.index(":") + 1:]) + 10)  # Можно и так - все объединить

@@ -8,6 +8,7 @@ def abc(i):
     print(int(i[i.index(":") + 1:]) + 10)
     # print(int(i.split(":")[-1]) + 10)
 
+
 abc(a)
 abc(b)
 abc(c)

@@ -11,4 +11,5 @@ def add_text(func):
 def desc(x):
     print(x)
 
-desc('hello', count = 2)
+
+desc('hello', count=2)

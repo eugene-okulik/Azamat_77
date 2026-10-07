@@ -17,5 +17,3 @@ new_list = PRICE_LIST.splitlines()
 
 prices = {x.split()[0]: int(x.split()[1][:-1]) for x in new_list}
 print(prices)
-
-

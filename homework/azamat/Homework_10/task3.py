@@ -11,6 +11,7 @@ def func_calc(func):
         return func(a, b, operation)
     return wrapper
 
+
 @func_calc
 def calc(a, b, operation):
     if operation == '+':

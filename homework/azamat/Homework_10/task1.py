@@ -10,4 +10,5 @@ def add_text(func):
 def desc(text):
     print(text)
 
+
 desc('hello')

@@ -19,8 +19,7 @@ class Book:
 
 
 class Peschool(Book):
-    def __init__(self, book_title, author, number_of_pages, ibsn, reserved,
-                     subject, class_school, task):
+    def __init__(self, book_title, author, number_of_pages, ibsn, reserved, subject, class_school, task):
         super().__init__(book_title, author, number_of_pages, ibsn, reserved)
         self.subject = subject
         self.class_school = class_school
@@ -29,10 +28,10 @@ class Peschool(Book):
     def check_reserved(self):
         if self.reserved:
             return (f'Название: {self.book_title}, Автор: {self.author}, старниц: {self.number_of_pages}, '
-                f'предмет: {self.subject}, класс: {self.class_school}, зарезервирована')
+                    f'предмет: {self.subject}, класс: {self.class_school}, зарезервирована')
         else:
             return (f'Название: {self.book_title}, Автор: {self.author}, старниц: {self.number_of_pages}, '
-                f'предмет: {self.subject}, класс: {self.class_school}')
+                    f'предмет: {self.subject}, класс: {self.class_school}')
 
 
 a = Peschool('Алгебра 7 класс', 'Иванов', 250, 123456789, True, 'Математика', 7, True)

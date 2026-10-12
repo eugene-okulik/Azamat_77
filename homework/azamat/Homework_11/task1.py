@@ -12,11 +12,10 @@ class Book:
     def check_reserved(self):
         if self.reserved:
             return (f'Название: {self.book_title}, Автор: {self.author}, старниц: {self.number_of_pages}, '
-                f'материал: {Book.page_material}, зарезервирована')
+                    f'материал: {Book.page_material}, зарезервирована')
         else:
             return (f'Название: {self.book_title}, Автор: {self.author}, старниц: {self.number_of_pages}, '
-                f'материал: {Book.page_material}')
-
+                    f'материал: {Book.page_material}')
 
 
 a = Book('aaa', 'bbb', 110, 102311234, False)
@@ -30,8 +29,3 @@ print(b.check_reserved())
 print(c.check_reserved())
 print(d.check_reserved())
 print(r.check_reserved())
-
-
-
-
-

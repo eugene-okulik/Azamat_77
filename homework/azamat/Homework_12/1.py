@@ -63,7 +63,7 @@ class Bouquet:
 
 rose = Rose("Красная", 9, 80, 250, 7)
 tulip = Tulip("Желтая", 8, 35, 150, 5)
-romashka= Romashka("Белый", 10, 25, 80, 4)
+romashka = Romashka("Белый", 10, 25, 80, 4)
 bouquet = Bouquet([rose, tulip, romashka])
 
 result = bouquet.find_by_lifespan(3)

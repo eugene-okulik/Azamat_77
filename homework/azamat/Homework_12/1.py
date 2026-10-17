@@ -7,17 +7,21 @@ class Flower:
         self.cost = cost
         self.lifespan_in_days = lifespan_in_days
 
+
 class Rose(Flower):
     def __init__(self, color, freshness, stem_length, cost, lifespan_in_days):
         super().__init__("Роза", color, freshness, stem_length, cost, lifespan_in_days)
+
 
 class Tulip(Flower):
     def __init__(self, color, freshness, stem_length, cost, lifespan_in_days):
         super().__init__("Тюльпан", color, freshness, stem_length, cost, lifespan_in_days)
 
+
 class Romashka(Flower):
     def __init__(self, color, freshness, stem_length, cost, lifespan_in_days):
         super().__init__("Ромашка", color, freshness, stem_length, cost, lifespan_in_days)
+
 
 class Bouquet:
     def __init__(self, flowers):  # При создании букета передаём список цветов

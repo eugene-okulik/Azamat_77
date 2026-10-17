@@ -10,10 +10,10 @@ class Book:
         self.reserved = reserved
 
     def check_reserved(self):
-        if self.reserved:
+        if self.reserved:  # Если ответ reserved ПОЛОЖИТЕЛЬНЫЙ
             return (f'Название: {self.book_title}, Автор: {self.author}, старниц: {self.number_of_pages}, '
                     f'материал: {Book.page_material}, зарезервирована')
-        else:
+        else:   # Если ответ reserved ОТРИЦАТЕЛЬНЫЙ
             return (f'Название: {self.book_title}, Автор: {self.author}, старниц: {self.number_of_pages}, '
                     f'материал: {Book.page_material}')
 

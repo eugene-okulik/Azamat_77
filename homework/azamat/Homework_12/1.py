@@ -29,7 +29,7 @@ class Bouquet:
 
     def get_total_cost(self):
         total_cost = 0
-        for _ in self.flowers:
+        for flower in self.flowers:
             total_cost += flower.cost
         return total_cost
 
@@ -37,7 +37,7 @@ class Bouquet:
         average_lifespan = 0
         if not self.flowers:
             return 0
-        for _ in self.flowers:
+        for flower in self.flowers:
             average_lifespan += flower.lifespan_in_days
         return average_lifespan / len(self.flowers)
 
@@ -55,7 +55,7 @@ class Bouquet:
 
     def find_by_lifespan(self, days):
         found_flowers = []
-        for _ in self.flowers:
+        for flower in self.flowers:
             if flower.lifespan_in_days >= days:
                 found_flowers.append(flower)
         return found_flowers

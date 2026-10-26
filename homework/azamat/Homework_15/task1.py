@@ -75,6 +75,7 @@ JOIN lessons l ON l.id = m.lesson_id
 JOIN subjects s ON s.id = l.subject_id
 WHERE st.id = {student_id}
 '''
+
 cursor.execute(select_3)
 print(cursor.fetchall())
 

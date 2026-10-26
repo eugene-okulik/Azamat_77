@@ -18,7 +18,7 @@ group_id = cursor.lastrowid
 
 cursor.execute(f"update students set group_id = {group_id} where id =  {student_id}")
 
-query = f"insert into books (title, taken_by_student_id) values (%s, %s)"
+query = "insert into books (title, taken_by_student_id) values (%s, %s)"
 values = [
     ('Qa SQL', student_id),
     ('Qa Python', student_id),
@@ -43,7 +43,7 @@ lesson_ID_2 = cursor.lastrowid
 cursor.execute(f"insert into lessons (title, subject_id) values ('Pytest', {subject_id_2})")
 lesson_ID_2_2 = cursor.lastrowid
 
-query = f"insert into marks (value, lesson_id, student_id) values (%s, %s, %s)"
+query = "insert into marks (value, lesson_id, student_id) values (%s, %s, %s)"
 values = [
     ('5', lesson_ID_1, student_id),
     ('5', lesson_ID_1_1, student_id),

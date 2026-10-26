@@ -1,5 +1,6 @@
-INSERT INTO students (name, second_name, group_id) VALUES('AZ', 'TA', 25151)
+INSERT INTO students (name, second_name, group_id) VALUES('AZ', 'TA')
 insert into `groups` (title, start_date, end_date) values ('AQA_test', '24 sep', '24 jan')
+update students set group_id = '25151' where id =  23431
 insert into books (title, taken_by_student_id) values ('QA SQL ', 23431)
 insert into books (title, taken_by_student_id) values ('QA Python SQL', 23431)
 insert into subjects (title) values ('course AQA by EO')

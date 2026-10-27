@@ -26,6 +26,7 @@ values = [
 ]
 cursor.executemany(query, values)
 
+
 def subjects(name):
     insert_query = "insert into subjects (title) values (%s)"
     cursor.execute(insert_query, (name,))
@@ -34,14 +35,16 @@ def subjects(name):
 subject_id_1 = subjects('course AQA by EO')
 subject_id_2 = subjects('course Azamat')
 
+
 def lesson(lesson_name, subject_id):
     insert_query = "INSERT INTO lessons (title, subject_id) VALUES (%s, %s)"
     cursor.execute(insert_query, (lesson_name, subject_id))
     return cursor.lastrowid
 
+
 lesson_ID_1 = lesson('Qa SQL', subject_id_1)
 
-lesson_ID_2 = lesson('Python',subject_id_1)
+lesson_ID_2 = lesson('Python', subject_id_1)
 
 lesson_ID_3 = lesson('Api', subject_id_2)
 

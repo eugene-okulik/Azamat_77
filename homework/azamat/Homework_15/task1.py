@@ -32,6 +32,7 @@ def subjects(name):
     cursor.execute(insert_query, (name,))
     return cursor.lastrowid
 
+
 subject_id_1 = subjects('course AQA by EO')
 subject_id_2 = subjects('course Azamat')
 

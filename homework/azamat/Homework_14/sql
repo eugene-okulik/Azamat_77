@@ -1,0 +1,31 @@
+INSERT INTO students (name, second_name) VALUES('AZ', 'TA')
+insert into `groups` (title, start_date, end_date) values ('AQA_test', '24 sep', '24 jan')
+update students set group_id = '25151' where id =  23431
+insert into books (title, taken_by_student_id) values ('QA SQL ', 23431)
+insert into books (title, taken_by_student_id) values ('QA Python SQL', 23431)
+insert into subjects (title) values ('course AQA by EO')
+insert into subjects (title) values ('course AZAMAT')
+insert into lessons (title, subject_id) values ('SQL AQA', 23757)
+insert into lessons (title, subject_id) values ('Python', 23757)
+insert into lessons (title, subject_id) values ('API', 23758)
+insert into lessons (title, subject_id) values ('Pytest', 23758)
+
+INSERT into marks (value, lesson_id, student_id) values ('5', 77342, 23431)
+INSERT into marks (value, lesson_id, student_id) values ('5', 77343, 23431)
+INSERT into marks (value, lesson_id, student_id) values ('5', 77344, 23431)
+INSERT into marks (value, lesson_id, student_id) values ('5', 77345, 23431)
+
+SELECT * FROM marks m
+WHERE m.student_id = 23431
+
+SELECT * FROM books b
+WHERE b.taken_by_student_id  = 23431
+
+SELECT g.title, b.title, m.value, l.title, s.title from students st
+JOIN `groups` g on g.id = st.group_id
+JOIN marks m on m.student_id  = st.id
+JOIN books b  on b.taken_by_student_id = st.id
+JOIN lessons l on l.id = m.lesson_id
+JOIN subjects s on s.id = l.subject_id
+WHERE st.id = 23431
+

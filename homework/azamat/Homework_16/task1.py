@@ -23,7 +23,7 @@ SELECT
     g.title,
     b.title,
     s.title,
-    l.title, 
+    l.title,
     m.value
 FROM students st
     JOIN `groups` g ON g.id = st.group_id
@@ -58,7 +58,6 @@ with open(data_csv, newline='') as csv_file:
 for a in data1:
     if a not in data2:
         print(a)
-
 
 
 db.commit()

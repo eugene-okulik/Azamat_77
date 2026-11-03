@@ -1,6 +1,5 @@
 import os
 import datetime
-from calendar import day_abbr
 
 homework_path = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 data_path = os.path.join(homework_path, "eugene_okulik", "hw_13", 'data.txt')

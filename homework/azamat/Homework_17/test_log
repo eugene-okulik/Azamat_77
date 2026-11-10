@@ -1,0 +1,9 @@
+2026-11-06 10:00:00 INFO Application started
+Application version 1.2
+
+2026-11-06 10:01:00 ERROR Database failed
+Connection timeout
+Retrying connection
+
+2026-11-06 10:02:00 WARN Slow response
+Response took 5 seconds

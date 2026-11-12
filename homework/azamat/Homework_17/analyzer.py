@@ -11,10 +11,11 @@ args = parser.parse_args()  # Записываем данные в переме�
 
 
 if os.path.isdir(args.path):  # Если у нас папка
-    files = [os.path.join(args.path, f)  # Объединение в один путь
-            for f in os.listdir(args.path)  # Перебираются файлы внутри папки
-            if os.path.isfile(os.path.join(args.path, f))
-        ]
+    files = [
+        os.path.join(args.path, f)  # Объединение в один путь
+        for f in os.listdir(args.path)  # Перебираются файлы внутри папки
+        if os.path.isfile(os.path.join(args.path, f))
+    ]
     print('Это папка')
 
 elif os.path.isfile(args.path):  # Если это файл

@@ -5,7 +5,7 @@ import re
 
 parser = argparse.ArgumentParser()
 parser.add_argument("path", help="Укажите путь к папке, где лежат логи. Пример C:\\user\\data\\logs")
-parser.add_argument('--text', required=True, help = "Указать в кавычках текст ошибки.")
+parser.add_argument('--text', required = True, help = "Указать в кавычках текст ошибки.")
 
 args = parser.parse_args()  # Записываем данные в переменную
 
@@ -17,7 +17,7 @@ if os.path.isdir(args.path):  # Если у нас папка
         ]
     print('Это папка')
 
-elif os.path.isfile(args.path): # Если это файл
+elif os.path.isfile(args.path):  # Если это файл
     files = [args.path]
     print('Это файл')
 
@@ -32,7 +32,7 @@ for file_path in files:
         for num, text in enumerate(file, start=1):  # Чиатем построчно с добавлением нумерации
             x = re.match(r'\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', text)
             if x is not None:
-                if timestamp is not None:  #Ищем timestamp в начале строки.
+                if timestamp is not None:  # Ищем timestamp в начале строки.
                     # Если встретили новую дату и предыдущий блок существует — сохраняем предыдущий блок.
                     blocks[timestamp] = current_block
                     # Создаём новый список.
@@ -41,8 +41,8 @@ for file_path in files:
                 timestamp = x.group()
             if timestamp is not None:
                 # Добавляем текущую строку вместе с её номером.
-                current_block.append((num,text))
-        if timestamp is not None: # После завершения файла сохраняем последний блок.
+                current_block.append((num, text))
+        if timestamp is not None:  # После завершения файла сохраняем последний блок.
             blocks[timestamp] = current_block
         for timestamp, lines in blocks.items():  # Перебираем содержимое в блоках
             args_text = args.text.lower().split()
@@ -63,4 +63,3 @@ for file_path in files:
                               f"Время: {timestamp},\n"
                               f"Строка: {num},\n"
                               f"Текст: {context}")
-

@@ -5,7 +5,7 @@ import re
 
 parser = argparse.ArgumentParser()
 parser.add_argument("path", help="Укажите путь к папке, где лежат логи. Пример C:\\user\\data\\logs")
-parser.add_argument('--text', required = True, help = "Указать в кавычках текст ошибки.")
+parser.add_argument('--text', required=True, help="Указать в кавычках текст ошибки.")
 
 args = parser.parse_args()  # Записываем данные в переменную
 

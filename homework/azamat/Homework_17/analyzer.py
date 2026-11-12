@@ -9,44 +9,6 @@ parser.add_argument('--text', required=True, help = "Указать в кавы�
 
 args = parser.parse_args()  # Записываем данные в переменную
 
-# # Проверка, что мы указали файл или путь
-# if os.path.isdir(args.path):  # Если у нас папка
-#     print('Это папка')
-#     for f in os.listdir(args.path):  # Перебираются файлы внутри папки
-#         with open(os.path.join(args.path, f), 'r') as file: # Через .join соединяем полный путь и файл
-#             for num, text in enumerate(file, start=1):
-#                 # Сравниваем что текст, который передали соответствует тексту файла
-#                 if args.text.lower() in text.lower():
-#                     x = (f'Файл {f}.\n'
-#                          f'Строка {num}. {text.strip()}')
-#                     print(x)
-# elif os.path.isfile(args.path): # Если это файл
-#     print('Это файл')
-#     with open((args.path), 'r') as file:
-#         # Читаем построчно и добавляем нумерации строк начиная с 1
-#         for num, text in enumerate(file, start=1):
-#             # Сравниваем что текст, который передали соответствует тексту файла
-#             if args.text.lower() in text.lower():
-#                 x = (f'Файла {os.path.basename(args.path)}\n'
-#                      f'Строка {num}.'
-#                      f'Содержание{text.strip()}')
-#                 print(x)
-# else:
-#     print('Путь не найден')
-# blocks = {}
-# timestamp = None
-# current_block = []
-# for num, text in enumerate(file, start=1):
-#     x = re.match(r'\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}', text)
-#     if x is not None:
-#         if timestamp is not None:
-#             blocks[timestamp] = current_block
-#             current_block = []
-#         timestamp = x.group()
-#     current_block.append(text)
-
-# Проверка, что мы указали файл или путь
-
 
 if os.path.isdir(args.path):  # Если у нас папка
     files = [os.path.join(args.path, f)  # Объединение в один путь
@@ -56,7 +18,7 @@ if os.path.isdir(args.path):  # Если у нас папка
     print('Это папка')
 
 elif os.path.isfile(args.path): # Если это файл
-    file = [args.path]
+    files = [args.path]
     print('Это файл')
 
 else:
@@ -82,10 +44,23 @@ for file_path in files:
                 current_block.append((num,text))
         if timestamp is not None: # После завершения файла сохраняем последний блок.
             blocks[timestamp] = current_block
-            for timestamp, lines in blocks.items():  # Перебираем содержимое в блоках
-                for num, text in lines:  # Берем нужное содержимое и перебираем снова
-                    if args.text.lower() in text.lower(): # Сравниваем полученный текс с текстом в 'логах'
-                        print(f"Имя: {file},\n"
+        for timestamp, lines in blocks.items():  # Перебираем содержимое в блоках
+            args_text = args.text.lower().split()
+            for num, text in lines:  # Берем нужное содержимое и перебираем снова
+                # Разделенеи на отдельные слова для удобного поиска
+                text_log = text.lower().split()
+                for i in range(len(text_log)):  # Перебираем всче слова в тексте лога
+                    # Проверяем, совпадает ли последовательность слов из лога с поисковым запросом
+                    if text_log[i:i + len(args_text)] == args_text:
+                        index = i
+                        start = max(0, i - 5)
+                        end = min(len(text_log), i + len(args_text) + 5)
+                        before = text_log[start:i]
+                        after = text_log[i + len(args_text):end]
+                        context = ' '.join(before + args_text + after)
+
+                        print(f"Имя файла: {os.path.basename(file_path)},\n"
                               f"Время: {timestamp},\n"
                               f"Строка: {num},\n"
-                              f"Текст: {text}")
+                              f"Текст: {context}")
+

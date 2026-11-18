@@ -3,8 +3,8 @@ import json
 
 
 def all_posts():
-     response = requests.get('http://objapi.course.qa-practice.com/object').json()
-     assert len(response) == 3, 'Not all posts returned'
+    response = requests.get('http://objapi.course.qa-practice.com/object').json()
+    assert len(response) == 3, 'Not all posts returned'
 
 
 def post_posts():

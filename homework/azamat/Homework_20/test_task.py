@@ -1,84 +1,89 @@
+import pytest
 import requests
 import json
-import unittest
-
-from homework.eugene_okulik.Lesson_18.api_requests import clear
 
 
-class TestPostApi(unittest.TestCase):
-
-    # Предусловия, создание поользователя и сохранием АЙДИ
-    def setUp(self) -> None:
-        print('Start testing')
-        body = json.dumps({
-            "data": {"color": 'white', "size": 'BUG'},
-            "name": 'Test_object'
-        })
-        headers = {'Content-Type': 'application/json'}
-        response = requests.post('http://objapi.course.qa-practice.com/object', data=body, headers=headers)
-        self.post_id = response.json()['id']
-
-    # Постусловие, очищаем все за собой
-    def tearDown(self) -> None:
-        print('Testing completed')
-        requests.delete(f'http://objapi.course.qa-practice.com/object/{self.post_id}')
-
-    # Тест на нахождение нужного пользователя
-    def test_one_post(self):
-        print('before test')
-        response = requests.get(f'http://objapi.course.qa-practice.com/object/{self.post_id}').json()
-        self.assertEqual(response['id'], self.post_id, 'Айди не совпадают')
-        print('after test')
+@pytest.fixture(scope='session')
+# Предусловия, создание поользователя и сохранием АЙДИ
+def setUp():
+    print("Start testing")
+    body = json.dumps({
+        "data": {"color": 'white', "size": 'BUG'},
+        "name": 'Test_object'
+    })
+    headers = {'Content-Type': 'application/json'}
+    response = requests.post('http://objapi.course.qa-practice.com/object', data=body, headers=headers)
+    post_id = response.json()['id']
+    yield post_id
+    # Удаляем сразу, чтобы не мусорить
+    requests.delete(f'http://objapi.course.qa-practice.com/object/{post_id}')
+    print("Testing completed")
 
 
-    def test_put_posts(self):
-        body = json.dumps({
-            "data": {"color": 'white', "size": 'BUG'},
-            "name": 'Test_77'
-        })
-        headers = {'Content-Type': 'application/json'}
-        response = (requests.put(
-            f'http://objapi.course.qa-practice.com/object/{self.post_id}',
-            data=body,
-            headers=headers
-        ).json())
-        self.assertEqual(response['name'], 'Test_77', 'Имя не изменен')
+# Тест на нахождение нужного пользователя
+def test_one_post(setUp):
+    print("before test")
+    response = requests.get(f'http://objapi.course.qa-practice.com/object/{setUp}')
+    assert response.status_code == 200, 'Статус не верный'
+    assert response.json()['id'] == setUp, 'ID объекта не совпадает'
+    print("after test")
+
+# Изменение данных
+def test_put_posts(setUp):
+    print("before test")
+    body = json.dumps({
+        "data": {"color": 'white', "size": 'BUG'},
+        "name": 'Test_77'
+    })
+    headers = {'Content-Type': 'application/json'}
+    response = (requests.put(
+        f'http://objapi.course.qa-practice.com/object/{setUp}',
+        data=body,
+        headers=headers
+    ))
+    assert response.status_code == 200
+    assert response.json()['name'] == "Test_77", 'Имя не изменен'
+    print("after test")
+
+# Изменение данных
+def test_patch_posts(setUp):
+    print("before test")
+    body = json.dumps({
+        "data": {"color": 'green', "size": 'BUG'}
+    })
+    headers = {'Content-Type': 'application/json'}
+    response = (requests.patch(f'http://objapi.course.qa-practice.com/object/{setUp}',
+                               data=body, headers=headers))
+    assert response.status_code == 200
+    assert response.json()['data']['color'] == 'green', 'Цвет не изменен'
+    print("after test")
+
+# Удаление пользователя
+def test_delete_posts(setUp):
+    response = (requests.delete(f'http://objapi.course.qa-practice.com/object/{setUp}'))
+    assert response.status_code == 200, 'Объект не найден'
 
 
-    def test_patch_posts(self):
-        body = json.dumps({
-            "data": {"color": 'green', "size": 'BUG'}
-        })
-        headers = {'Content-Type': 'application/json'}
-        response = (requests.patch(f'http://objapi.course.qa-practice.com/object/{self.post_id}',
-                                   data=body, headers=headers).json())
-        self.assertEqual(response['data']['color'], 'green', 'Цвет не изменен')
+# Вывод всех пользоваетелей
+def test_all_posts():
+    print("before test")
+    response = requests.get('http://objapi.course.qa-practice.com/object')
+    assert response.status_code == 200
+    assert len(response.json()) == 1, 'Not all posts returned'
+    print("after test")
 
 
-    def delete_posts(self):
-        response = (requests.delete(f'http://objapi.course.qa-practice.com/object/{self.post_id}')).json()
-        self.assertEqual(response.status_code, 200, 'Объект не удалён')
-
-
-class TestNotSetUP(unittest.TestCase):
-
-    def tearDown(self) -> None:
-        print('Testing completed')
-        requests.delete(f'http://objapi.course.qa-practice.com/object/{self.test_post_a_posts()}')
-
-    # Вывод всех пользоваетелей
-    def test_all_posts(self):
-        response = requests.get('http://objapi.course.qa-practice.com/object').json()
-        self.assertEqual(len(response), 1, 'Not all posts returned')
-
-
-    def test_post_a_posts(self):
-        body = json.dumps({
-            "data": {"color": 'white', "size": 'BUG'},
-            "name": 'Test_77'
-        })
-        headers = {'Content-Type': 'application/json'}
-        response = requests.post('http://objapi.course.qa-practice.com/object', data=body, headers=headers)
-        self.assertEqual(response.status_code, 200, 'Статус не верный')
-        self.assertEqual(response.json()['name'], 'Test_77')
-        return response.json()['id']
+# Добавление пользователей
+def test_post_a_posts():
+    print("before test")
+    body = json.dumps({
+        "data": {"color": 'white', "size": 'BUG'},
+        "name": 'Test_77'
+    })
+    headers = {'Content-Type': 'application/json'}
+    response = requests.post('http://objapi.course.qa-practice.com/object', data=body, headers=headers)
+    assert response.status_code == 200
+    assert response.json()['name'] == 'Test_77'
+    post_id = response.json()['id']
+    requests.delete(f'http://objapi.course.qa-practice.com/object/{post_id}')
+    print("after test")

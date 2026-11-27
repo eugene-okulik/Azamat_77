@@ -7,10 +7,10 @@ import json
 # Предусловия, создание поользователя и сохранием АЙДИ
 def setUp():
     print("Start testing")
-    body = json.dumps({
+    body = {
         "data": {"color": 'white', "size": 'BUG'},
         "name": 'Test_object'
-    })
+    }
     headers = {'Content-Type': 'application/json'}
     response = requests.post('http://objapi.course.qa-practice.com/object', data=body, headers=headers)
     post_id = response.json()['id']
@@ -46,6 +46,7 @@ def test_put_posts(setUp):
     print("after test")
 
 # Изменение данных
+@pytest.mark.medium
 def test_patch_posts(setUp):
     print("before test")
     body = json.dumps({
@@ -74,6 +75,7 @@ def test_all_posts():
 
 
 # Добавление пользователей
+@pytest.mark.critical
 def test_post_a_posts():
     print("before test")
     body = json.dumps({

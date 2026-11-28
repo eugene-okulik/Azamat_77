@@ -27,6 +27,8 @@ def test_one_post(setUp):
     assert response.status_code == 200, 'Статус не верный'
     assert response.json()['id'] == setUp, 'ID объекта не совпадает'
     print("after test")
+
+
 # Изменение данных
 def test_put_posts(setUp):
     print("before test")
@@ -43,6 +45,8 @@ def test_put_posts(setUp):
     assert response.status_code == 200
     assert response.json()['name'] == "Test_77", 'Имя не изменен'
     print("after test")
+
+
 # Изменение данных
 @pytest.mark.medium
 def test_patch_posts(setUp):
@@ -56,6 +60,7 @@ def test_patch_posts(setUp):
     assert response.status_code == 200
     assert response.json()['data']['color'] == 'green', 'Цвет не изменен'
     print("after test")
+
 
 # Удаление пользователя
 def test_delete_posts(setUp):
